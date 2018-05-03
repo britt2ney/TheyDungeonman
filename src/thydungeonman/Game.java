@@ -17,9 +17,18 @@ public class Game {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Dungeonman dude = new Dungeonman();
+        
+        while(dude.keepPlaying() == 'Y'){
+            playGame(dude);
+        }
+    }
+    
+    public static void playGame(Dungeonman dude){
         Scanner keyboard = new Scanner(System.in);
         String input;
-        Dungeonman dude = new Dungeonman();
+        dude.setAlive(true);
+        dude.openingScreen();
         dude.goMain();
         dude.prompt();
         
@@ -44,5 +53,9 @@ public class Game {
             }
             dude.prompt();
         }while(dude.isAlive());
+        
+        if(dude.gameOver()){
+            dude.wantToKeepPlaying(keyboard.next().charAt(0));
+        }
     }
 }

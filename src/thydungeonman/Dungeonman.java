@@ -14,15 +14,28 @@ public class Dungeonman {
     private String location;
     private boolean alive;
     private boolean trinket;
+    private char play;
+    private boolean lost;
     
     public Dungeonman(){
         score = 0;
         location = "main";
-        alive = true;
         trinket = false;
+        play = 'Y';
+    }
+    
+    public void openingScreen(){
         clearScreen();
         System.out.println("THY DUNGEONMAN\n" +
             "\n\nYOU ARE THY DUNGEONMAN!\n");
+    }
+    
+    public char keepPlaying(){
+        return play;
+    }
+    
+    public void wantToKeepPlaying(char play){
+        this.play = play;
     }
 
     public boolean isAlive() {
@@ -58,6 +71,9 @@ public class Dungeonman {
             case "help":
                 goMain();
                 break;
+            case "die":
+                System.out.print(goDie());
+                break;
             case "go north":
                 goNorth();
                 break;
@@ -89,17 +105,20 @@ public class Dungeonman {
             case "help":
                 goNorth();
                 break;
+            case "die":
+                System.out.print(goDie());
+                break;
             case "go south":
                 goMain();
                 break;
             case "get rope":
                 System.out.print("\nYou attempt to take ye ROPE but "
                         + "alas it is enchanted! It glows a mustard "
-                        + "red and smells like a public privy. The "
+                        + "red and smells like a public privy.\nThe "
                         + "ROPE wraps round your neck and hangs you "
-                        + "from parapets. With your last breath, "
-                        + "you wonder what parapets are. GAME OVER\n");
-                setAlive(false);
+                        + "from parapets.\nWith your last breath, "
+                        + "you wonder what parapets are. GAME OVER.");
+                gameOver();
                 break;
             default:
                 System.out.print(badInput());
@@ -110,6 +129,9 @@ public class Dungeonman {
         switch(input.toLowerCase()){
             case "help":
                 goSouth();
+                break;
+            case "die":
+                System.out.print(goDie());
                 break;
             case "go north":
                 goMain();
@@ -135,6 +157,9 @@ public class Dungeonman {
         switch(input.toLowerCase()){
             case "help":
                 goDennis();
+                break;
+            case "die":
+                System.out.print(goDie());
                 break;
             case "not dennis":
                 goMain();
@@ -209,5 +234,16 @@ public class Dungeonman {
     
     public String badInput(){
         return "\nThat does not computeth. Type HELP is thou needs of it.";
+    }
+    
+    public String goDie(){
+        return "That wasn't very smart.";
+    }
+    
+    public boolean gameOver(){
+        lost = true;
+        alive = false;
+        System.out.print(" Your score was: " + score + ".\nPlay again? [Y/N] ");
+        return lost;
     }
 }
