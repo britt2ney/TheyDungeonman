@@ -20,6 +20,7 @@ public class Dungeonman {
         location = "main";
         alive = true;
         trinket = false;
+        clearScreen();
         System.out.println("THY DUNGEONMAN\n" +
             "\n\nYOU ARE THY DUNGEONMAN!\n");
     }
