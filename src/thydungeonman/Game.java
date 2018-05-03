@@ -20,6 +20,7 @@ public class Game {
         Scanner keyboard = new Scanner(System.in);
         String input;
         Dungeonman dude = new Dungeonman();
+        dude.clearScreen();
         dude.goMain();
         dude.prompt();
         
